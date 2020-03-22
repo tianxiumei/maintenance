@@ -1,0 +1,37 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+    "strict": true,
+    "lib": ["dom", "es2015"],
+    "allowJs": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "experimentalDecorators": true,
+    "types": ["reflect-metadata"],
+    "emitDecoratorMetadata": true,
+    "sourceMap": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "noEmit": true,
+    "jsx": "react",
+    "strictNullChecks": true,
+    "skipLibCheck": true,
+    "baseUrl": "./src",
+    "paths": {
+      "src/*": ["./*"]
+    },
+    "outDir": ".tmp",
+    "typeRoots": ["./types", "./node_modules/@types"],
+    "noUnusedLocals": true,
+    "downlevelIteration": true
+  },
+  "include": ["src", "node_modules/@types", "types", "test", "mock"],
+  "exclude": ["mock/appassets"],
+  "compileOnSave": false,
+  "buildOnSave": false,
+  "atom": {
+    "rewriteTsconfig": false
+  }
+}
