@@ -1,0 +1,31 @@
+.modal {
+  &.noFooter {
+    :global {
+      .ant-modal-body {
+        padding: 24px 40px;
+      }
+    }
+  }
+  :global {
+    .ant-modal-header {
+      text-align: center;
+    }
+    .ant-modal-body {
+      padding: 24px 40px 0 40px;
+    }
+    .ant-modal-footer {
+      border: none;
+      text-align: center;
+      padding-top: 12px;
+      padding-bottom: 32px;
+
+      .ant-btn {
+        min-width: 90px;
+        height: 40px;
+        line-height: 40px;
+        margin: 0 20px;
+        border: none;
+      }
+    }
+  }
+}
