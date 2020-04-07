@@ -9,7 +9,7 @@ export function listDecares(): Promise<IDecare[]> {
 
 // 根据项目名称查找列表
 export function listDecaresByName(proName: string): Promise<IDecare[]> {
-  return get(`${API}/reg/proName/${proName}`) as any;
+  return get(`${API}/reg/view/proName/${proName}`) as any;
 }
 
 //创建数据申报

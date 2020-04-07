@@ -4,11 +4,11 @@ import { DecareStore } from "services/Decare";
 import { observer } from "mobx-react";
 import { Popconfirm, Button } from "antd";
 import { computed, action, observable, reaction } from "mobx";
+import { debounce } from "lodash";
 import { IDecare } from "apis/maintenance/model";
 import AdvancedTable from "../../../components/Base/AdvancedTable";
 import bind from "../../../utils/bind";
 import { DeclareModal } from "./Modal";
-import { debounce } from "lodash";
 
 @observer
 export default class Declare extends BasicComponent<any, any> {
