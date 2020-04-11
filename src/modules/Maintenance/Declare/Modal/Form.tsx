@@ -11,7 +11,7 @@ const formItemLayout = {
     span: 5,
   },
   wrapperCol: {
-    span: 15,
+    span: 18,
   },
 };
 
@@ -130,7 +130,7 @@ export const CreateForm = (props: IFormProps) => {
           },
         ]}
       >
-        <Input placeholder="请填写计量单位" />
+        <Input placeholder="请填写子类名称" />
       </Form.Item>
       <Form.Item
         {...formItemLayout}
@@ -143,7 +143,7 @@ export const CreateForm = (props: IFormProps) => {
           },
         ]}
       >
-        <DatePicker placeholder="选择日期" />
+        <DatePicker style={{ width: "480px" }} placeholder="选择日期" />
       </Form.Item>
       <Form.Item {...formItemLayout} name="fix" label="修理内容">
         <Input />

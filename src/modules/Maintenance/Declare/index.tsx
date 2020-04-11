@@ -1,11 +1,10 @@
 import React from "react";
-import BasicComponent, { destroy } from "components/BasicComponent";
-import { DecareStore } from "services/Decare";
 import { observer } from "mobx-react";
 import { Popconfirm, Button } from "antd";
 import { debounce } from "lodash";
+import BasicComponent, { destroy } from "components/BasicComponent";
+import { DecareStore } from "services/Decare";
 import { computed, action, observable, reaction } from "mobx";
-import { debounce } from "lodash";
 import { IDecare } from "apis/maintenance/model";
 import AdvancedTable from "../../../components/Base/AdvancedTable";
 import bind from "../../../utils/bind";
@@ -72,10 +71,6 @@ export default class Declare extends BasicComponent<any, any> {
       {
         dataIndex: "regDate",
         title: "日期",
-        render: (regDate: any) => {
-          const date = new Date(regDate);
-          return `${date.getFullYear()}-${date.getMonth()}-${date.getDay()}`;
-        },
       },
       {
         title: "操作",
@@ -147,12 +142,22 @@ export default class Declare extends BasicComponent<any, any> {
             title: "创建申报",
             onClick: () => this.setShowCreateModal(true),
           }}
-          searchFilter={{
-            placeholder: "名称",
-            value: this.decareStore.proName,
-            key: "display",
-            onChange: this.decareStore.setProName,
-          }}
+          searchFilters={[
+            {
+              placeholder: "id",
+              value: this.decareStore.proName,
+              key: "display",
+              type: "string",
+              onChange: this.decareStore.setProName as any,
+            },
+            {
+              placeholder: "名称",
+              value: this.decareStore.proName,
+              key: "display",
+              type: "string",
+              onChange: this.decareStore.setProName as any,
+            },
+          ]}
         />
         {this.showCreateModal && (
           <DeclareModal

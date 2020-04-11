@@ -1,37 +1,40 @@
 import React from "react";
 import moment from "moment";
 import Modal from "components/Base/Modal";
+import { IProject } from "apis/project/model";
 import { IKeyValues } from "models/base";
 import BasicComponent from "../../../../components/BasicComponent";
 import bind from "../../../../utils/bind";
-import { IDecare } from "../../../../apis/maintenance/model";
 import { CreateForm } from "./Form";
 
-interface IDecareModaleProps {
-  decare: IDecare | null;
+interface IProjectModaleProps {
+  project: IProject | null;
   onCancle: () => void;
-  create: (decare: IDecare) => Promise<any>;
-  update: (decare: IDecare) => Promise<any>;
+  create: (project: IProject) => Promise<any>;
+  update: (project: IProject) => Promise<any>;
 }
 
-export class DeclareModal extends BasicComponent<IDecareModaleProps, any> {
+export class ProjectModal extends BasicComponent<IProjectModaleProps, any> {
   @bind
-  handleSubmit(decare: IDecare) {
-    const result = decare as IKeyValues;
-    if (this.props.decare) {
+  handleSubmit(project: IProject) {
+    const result = project as IKeyValues;
+    Object.keys(result).forEach((key) => {
+      result[key] = result[key] || "";
+    });
+    if (this.props.project) {
       this.props
         .update({
           ...result,
-          id: this.props.decare.id,
-          regDate: moment(result.regDate).valueOf(),
-        } as IDecare)
+          code: this.props.project.code,
+          date1: moment(result.date1).valueOf(),
+        } as IProject)
         .then(() => this.handleCancel());
     } else {
       this.props
         .create({
           ...result,
-          regDate: moment(result.regDate).valueOf(),
-        } as IDecare)
+          date1: moment(result.date1).valueOf(),
+        } as IProject)
         .then(() => this.handleCancel());
     }
   }
@@ -42,14 +45,14 @@ export class DeclareModal extends BasicComponent<IDecareModaleProps, any> {
   render() {
     return (
       <Modal
-        title={this.props.decare ? "编辑" : "创建"}
-        width={700}
+        title="创建"
+        width={600}
         footer={null}
         visible={true}
         onCancel={this.handleCancel}
       >
         <CreateForm
-          declare={this.props.decare}
+          project={this.props.project}
           onCancle={this.handleCancel}
           onSubmit={this.handleSubmit}
         />

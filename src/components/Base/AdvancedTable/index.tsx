@@ -2,24 +2,25 @@ import * as React from "react";
 import classnames from "classnames";
 import { observer } from "mobx-react";
 import { toJS, computed } from "mobx";
-import { Card, Button, Input } from "antd";
+import { Card, Button, Input, DatePicker } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import Table, { TableProps } from "antd/lib/table";
-import bind from "utils/bind";
 
 import "./style.scss";
+import moment from "moment";
 
 interface ISearchProps {
   placeholder: string;
-  value: string;
+  value: string | number;
   key: string;
-  onChange: (value: string) => void;
+  type: "string" | "number" | "date";
+  onChange: (value: string | number) => void;
 }
 
 interface IAdvancedTableProps<T> extends TableProps<T> {
   tableTitle?: string | React.ReactNode;
   addBtn?: IButtonProps;
-  searchFilter?: ISearchProps;
+  searchFilters?: ISearchProps[];
 }
 
 interface IButtonProps {
@@ -42,15 +43,34 @@ export default class AdvancedTable<T> extends React.Component<
   }
   @computed
   get searchFilter() {
-    const { searchFilter } = this.props;
-    if (searchFilter) {
-      return (
-        <Input
-          onChange={this.handleSearchChange as any}
-          className="input"
-          prefix={<SearchOutlined />}
-        />
-      );
+    const { searchFilters } = this.props;
+    if (searchFilters) {
+      return searchFilters.map((search, index) => {
+        const type = search.type;
+        if (type === "date") {
+          return (
+            <DatePicker
+              className="date"
+              key={index}
+              placeholder={search.placeholder}
+              onChange={(date) => {
+                if (date) {
+                  search.onChange(moment(date).valueOf());
+                }
+              }}
+            />
+          );
+        }
+        return (
+          <Input
+            key={index}
+            onChange={(e) => search.onChange(e.target.value)}
+            className="input"
+            placeholder={search.placeholder}
+            prefix={<SearchOutlined />}
+          />
+        );
+      });
     }
     return "";
   }
@@ -62,11 +82,6 @@ export default class AdvancedTable<T> extends React.Component<
         {this.searchFilter}
       </div>
     );
-  }
-
-  @bind
-  handleSearchChange(e: any) {
-    this.props.searchFilter!.onChange(e.target.value);
   }
 
   render() {

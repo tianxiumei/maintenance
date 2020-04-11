@@ -1,7 +1,9 @@
 export enum StorageName {
-  RoleID = "roleID",
+  RoleID = 'roleID',
 }
 
 export interface IKeyValues<T = any> {
-  [key: string]: T;
+  [key: string]: T
 }
+
+export const dateFormat = 'YYYY-MM-DD'
