@@ -50,7 +50,7 @@ export default class AdvancedTable<T> extends React.Component<
         if (type === "date") {
           return (
             <DatePicker
-              className="date"
+              className="dadvanceDate"
               key={index}
               placeholder={search.placeholder}
               onChange={(date) => {
