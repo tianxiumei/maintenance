@@ -3,11 +3,11 @@ import classnames from "classnames";
 import { observer } from "mobx-react";
 import { toJS, computed } from "mobx";
 import { Card, Button, Input, DatePicker } from "antd";
+import moment from "moment";
 import { SearchOutlined } from "@ant-design/icons";
 import Table, { TableProps } from "antd/lib/table";
 
 import "./style.scss";
-import moment from "moment";
 
 interface ISearchProps {
   placeholder: string;
@@ -56,6 +56,8 @@ export default class AdvancedTable<T> extends React.Component<
               onChange={(date) => {
                 if (date) {
                   search.onChange(moment(date).valueOf());
+                } else {
+                  search.onChange(-1);
                 }
               }}
             />

@@ -52,8 +52,8 @@ export class PlanStore extends Store {
   }
 
   @bind
-  createPlan(decare: IPlan) {
-    return project(decare).then(() => {
+  createPlan(plane: IPlan) {
+    return project(plane).then(() => {
       this.listPlans()
       message.success('创建成功')
     })
