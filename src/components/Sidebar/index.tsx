@@ -2,7 +2,9 @@ import React from "react";
 import { Menu, Layout } from "antd";
 import { observer } from "mobx-react";
 import { Link } from "react-router-dom";
-import { observable } from "mobx";
+import { computed } from "mobx";
+import { isNull } from "lodash";
+import { StorageName } from "../../constants";
 
 import "./style.scss";
 
@@ -15,13 +17,17 @@ interface ISideBarProps {}
 
 @observer
 export default class SideBar extends React.Component<ISideBarProps, any> {
-  @observable collapsed: boolean = false;
-
   componentDidMount() {}
+
+  @computed
+  get user() {
+    const localeUser = localStorage.getItem(StorageName.User);
+    return isNull(localeUser) ? null : JSON.parse(localeUser);
+  }
 
   render() {
     return (
-      <Sider trigger={null} collapsible collapsed={this.collapsed}>
+      <Sider trigger={null} collapsible>
         <div className="logo" />
         <Menu
           theme="dark"
@@ -48,9 +54,11 @@ export default class SideBar extends React.Component<ISideBarProps, any> {
               <Link to="/main/investment/report">月报</Link>
             </MenuItem>
           </SubMenu>
-          <MenuItem key="user">
-            <Link to="/main/user">用户管理</Link>
-          </MenuItem>
+          {!isNull(this.user) && this.user.roleID === 597 && (
+            <MenuItem key="user">
+              <Link to="/main/user">用户管理</Link>
+            </MenuItem>
+          )}
         </Menu>
       </Sider>
     );
