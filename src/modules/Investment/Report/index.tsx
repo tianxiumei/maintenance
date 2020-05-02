@@ -9,13 +9,21 @@ import { IReport } from "apis/Investment/Report/model";
 import AdvancedTable from "../../../components/Base/AdvancedTable";
 import bind from "../../../utils/bind";
 import ReportModal from "./Modal";
+import ReportDetail from "./ReportDetail";
 
 @observer
 export default class Report extends BasicComponent<any, any> {
   @destroy() reportStore = new ReportStore();
   @observable editReport: IReport | null = null;
   @observable showCreateModal: boolean = false;
+  @observable showReport: boolean = false;
   debounceListEvent = debounce(this.reportStore.listReports, 500);
+
+  @bind
+  @action
+  setShowReport(showReport: boolean) {
+    this.showReport = showReport;
+  }
 
   @bind
   @action
@@ -129,6 +137,10 @@ export default class Report extends BasicComponent<any, any> {
           columns={this.columns}
           dataSource={this.dataSource}
           emptyText="暂无数据"
+          addBtn={{
+            title: "报表显示",
+            onClick: () => this.setShowReport(true),
+          }}
           searchFilters={[
             {
               placeholder: "名称",
@@ -154,6 +166,14 @@ export default class Report extends BasicComponent<any, any> {
             }}
             update={this.reportStore.updateReport}
             report={this.editReport}
+          />
+        )}
+        {this.showReport && (
+          <ReportDetail
+            onCancel={() => {
+              this.setShowReport(false);
+            }}
+            dataSource={this.dataSource}
           />
         )}
       </div>

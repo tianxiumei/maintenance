@@ -9,12 +9,14 @@ import { observer } from "mobx-react";
 import AdvancedTable from "../../../components/Base/AdvancedTable";
 import bind from "../../../utils/bind";
 import { PlaneModal } from "./Modal";
+import ReportModal from "./ReportModal";
 
 @observer
 export default class Plane extends BasicComponent<any, any> {
   @destroy() planStore = new PlanStore();
   @observable editPlan: IPlan | null = null;
   @observable showCreateModal: boolean = false;
+  @observable showReport: boolean = false;
   debounceListEvent = debounce(this.planStore.listPlans, 500);
 
   @bind
@@ -27,6 +29,12 @@ export default class Plane extends BasicComponent<any, any> {
   @action
   setEditPlane(editPlane: IPlan | null) {
     this.editPlan = editPlane;
+  }
+
+  @bind
+  @action
+  setShowReport(showReport: boolean) {
+    this.showReport = showReport;
   }
 
   @computed
@@ -109,7 +117,7 @@ export default class Plane extends BasicComponent<any, any> {
   }
 
   @computed
-  get dataSource() {
+  get dataSource(): any {
     return this.planStore.plans
       ? this.planStore.plans.map((plan) => ({
           ...plan,
@@ -140,6 +148,10 @@ export default class Plane extends BasicComponent<any, any> {
           columns={this.columns}
           dataSource={this.dataSource}
           emptyText="暂无数据"
+          addBtn={{
+            title: "报表显示",
+            onClick: () => this.setShowReport(true),
+          }}
           searchFilters={[
             {
               placeholder: "编号",
@@ -165,6 +177,14 @@ export default class Plane extends BasicComponent<any, any> {
             }}
             update={this.planStore.updatePlan}
             plan={this.editPlan!}
+          />
+        )}
+        {this.showReport && (
+          <ReportModal
+            onCancel={() => {
+              this.setShowReport(false);
+            }}
+            dataSource={this.dataSource}
           />
         )}
       </div>

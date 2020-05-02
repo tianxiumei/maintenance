@@ -285,10 +285,10 @@ export const CreateForm = (props: IFormProps) => {
       >
         <DatePicker placeholder="记录日期" className="date" />
       </Form.Item>
-      <Form.Item {...formItemLayout} name="startDate" label="启用日期">
-        <DatePicker placeholder="选择启用日期" className="date" />
+      <Form.Item {...formItemLayout} name="startDate" label="项目开建年月">
+        <DatePicker placeholder="选择项目开建年月" className="date" />
       </Form.Item>
-      <Form.Item {...formItemLayout} name="productDate" label="实施日期">
+      <Form.Item {...formItemLayout} name="productDate" label="项目投产年月">
         <DatePicker placeholder="项目投产年月" className="date" />
       </Form.Item>
       <Form.Item {...tailLayout}>
