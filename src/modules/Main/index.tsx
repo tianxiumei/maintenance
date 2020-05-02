@@ -5,6 +5,7 @@ import OriginLayout from "./Layout";
 
 const AsyncMaintenance = lazy(() => import(`modules/Maintenance`));
 const AsyncInvestment = lazy(() => import(`modules/Investment`));
+const AsyncUser = lazy(() => import(`modules/User`));
 export default class Main extends React.Component {
   render() {
     return (
@@ -13,6 +14,7 @@ export default class Main extends React.Component {
         <Switch>
           <Route path="/main/maintenance" component={AsyncMaintenance} />
           <Route path="/main/investment" component={AsyncInvestment} />
+          <Route path="/main/user" component={AsyncUser} />
           <Route path="/main" component={NotFound} />
         </Switch>
       </OriginLayout>
