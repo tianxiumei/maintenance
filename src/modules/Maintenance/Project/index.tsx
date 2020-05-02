@@ -6,15 +6,18 @@ import { debounce } from "lodash";
 import { computed, action, observable, reaction } from "mobx";
 import { IProject } from "apis/project/model";
 import ProjectStore from "services/Project";
+import { API } from "apis/constains";
 import AdvancedTable from "../../../components/Base/AdvancedTable";
 import bind from "../../../utils/bind";
 import { ProjectModal } from "./Modal";
+import Preview from "./Preview";
 
 @observer
 export default class Project extends BasicComponent<any, any> {
   @destroy() projectStore = new ProjectStore();
   @observable editProject: IProject | null = null;
   @observable showCreateModal: boolean = false;
+  @observable preview: boolean = false;
   debounceListEvent = debounce(this.projectStore.listProject, 500);
 
   @bind
@@ -27,6 +30,17 @@ export default class Project extends BasicComponent<any, any> {
   @action
   setEditDecare(editProject: IProject | null) {
     this.editProject = editProject;
+  }
+
+  @bind
+  @action
+  setPreview(preview: boolean) {
+    this.preview = preview;
+  }
+
+  @bind
+  save() {
+    window.open(`${API}/item/view/save`);
   }
 
   @computed
@@ -76,26 +90,10 @@ export default class Project extends BasicComponent<any, any> {
             <Button
               type="link"
               onClick={() => {
-                this.handleEdit(project);
+                this.save();
               }}
             >
               保存
-            </Button>
-            <Button
-              type="link"
-              onClick={() => {
-                this.handleEdit(project);
-              }}
-            >
-              打印
-            </Button>
-            <Button
-              type="link"
-              onClick={() => {
-                this.handleEdit(project);
-              }}
-            >
-              预览
             </Button>
             <Popconfirm
               title={`确定删除${project.code}?`}
@@ -153,6 +151,10 @@ export default class Project extends BasicComponent<any, any> {
             title: "创建",
             onClick: () => this.setShowCreateModal(true),
           }}
+          preview={{
+            title: "预览",
+            onClick: () => this.setPreview(true),
+          }}
           searchFilters={[
             {
               placeholder: "编码",
@@ -179,6 +181,14 @@ export default class Project extends BasicComponent<any, any> {
             create={this.projectStore.createProject}
             update={this.projectStore.updateProject}
             project={this.editProject}
+          />
+        )}
+        {this.preview && (
+          <Preview
+            dataSource={this.dataSource}
+            onCancel={() => {
+              this.setPreview(false);
+            }}
           />
         )}
       </div>

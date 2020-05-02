@@ -20,6 +20,9 @@ interface ISearchProps {
 interface IAdvancedTableProps<T> extends TableProps<T> {
   tableTitle?: string | React.ReactNode;
   addBtn?: IButtonProps;
+  preview?: IButtonProps;
+  saveBtn?: IButtonProps;
+  printBtn?: IButtonProps;
   searchFilters?: ISearchProps[];
 }
 
@@ -38,6 +41,30 @@ export default class AdvancedTable<T> extends React.Component<
     const { addBtn } = this.props;
     if (addBtn) {
       return <Button onClick={addBtn.onClick}>{addBtn.title}</Button>;
+    }
+    return "";
+  }
+  @computed
+  get preview() {
+    const { preview } = this.props;
+    if (preview) {
+      return <Button onClick={preview.onClick}>{preview.title}</Button>;
+    }
+    return "";
+  }
+  @computed
+  get saveBtn() {
+    const { saveBtn } = this.props;
+    if (saveBtn) {
+      return <Button onClick={saveBtn.onClick}>{saveBtn.title}</Button>;
+    }
+    return "";
+  }
+  @computed
+  get printBtn() {
+    const { printBtn } = this.props;
+    if (printBtn) {
+      return <Button onClick={printBtn.onClick}>{printBtn.title}</Button>;
     }
     return "";
   }
@@ -81,6 +108,9 @@ export default class AdvancedTable<T> extends React.Component<
     return (
       <div>
         {this.addBtn}
+        {this.preview}
+        {this.saveBtn}
+        {this.printBtn}
         {this.searchFilter}
       </div>
     );
