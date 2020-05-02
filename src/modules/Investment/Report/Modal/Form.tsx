@@ -149,9 +149,6 @@ export const CreateForm = (props: IFormProps) => {
       <Form.Item {...formItemLayout} name="mananger" label="现场管理人">
         <Input />
       </Form.Item>
-      <Form.Item {...formItemLayout} name="imageProgress" label="形象进度">
-        <Input />
-      </Form.Item>
       <Form.Item {...formItemLayout} name="constructionArea" label="施工面积">
         <Input type="number" />
       </Form.Item>

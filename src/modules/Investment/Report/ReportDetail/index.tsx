@@ -4,6 +4,7 @@ import BasicComponent from "components/BasicComponent";
 import { observer } from "mobx-react";
 import { Table } from "antd";
 import Modal from "components/Base/Modal";
+import { IReport } from "src/apis/Investment/Report/model";
 
 interface IReportModalProps {
   dataSource: any;
@@ -77,12 +78,16 @@ export default class ReportDetail extends BasicComponent<
                 dataIndex: "plantotalInvest",
                 key: "plantotalInvest",
                 width: 150,
+                sorter: (a: IReport, b: IReport) =>
+                  a.plantotalInvest - b.plantotalInvest,
               },
               {
                 title: "自开建至本年累计完成投资",
                 dataIndex: "stotalInvest",
                 key: "stotalInvest",
                 width: 150,
+                sorter: (a: IReport, b: IReport) =>
+                  a.stotalInvest - b.stotalInvest,
               },
             ],
           },
@@ -94,12 +99,16 @@ export default class ReportDetail extends BasicComponent<
                 dataIndex: "yplanInvest",
                 key: "yplanInvest",
                 width: 150,
+                sorter: (a: IReport, b: IReport) =>
+                  a.yplanInvest - b.yplanInvest,
               },
               {
                 title: "自年初累计完成投资",
                 dataIndex: "ytotalInvest",
                 key: "ytotalInvest",
                 width: 150,
+                sorter: (a: IReport, b: IReport) =>
+                  a.ytotalInvest - b.ytotalInvest,
               },
             ],
           },
@@ -180,12 +189,15 @@ export default class ReportDetail extends BasicComponent<
                 dataIndex: "constructionArea",
                 key: "constructionArea",
                 width: 200,
+                sorter: (a: IReport, b: IReport) =>
+                  a.constructionArea - b.constructionArea,
               },
               {
                 title: "住宅（值为数据表的住宅（施工））",
                 dataIndex: "houseCon",
                 key: "houseCon",
                 width: 200,
+                sorter: (a: IReport, b: IReport) => a.houseCon - b.houseCon,
               },
             ],
           },
@@ -197,12 +209,15 @@ export default class ReportDetail extends BasicComponent<
                 dataIndex: "completesArea",
                 key: "completesArea",
                 width: 200,
+                sorter: (a: IReport, b: IReport) =>
+                  a.completesArea - b.completesArea,
               },
               {
                 title: "住宅（值为数据表的住宅（竣工））",
                 dataIndex: "houseCom",
                 key: "houseCom",
                 width: 200,
+                sorter: (a: IReport, b: IReport) => a.houseCom - b.houseCom,
               },
             ],
           },
