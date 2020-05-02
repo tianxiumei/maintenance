@@ -55,7 +55,7 @@ export default class AdvancedTable<T> extends React.Component<
               placeholder={search.placeholder}
               onChange={(date) => {
                 if (date) {
-                  search.onChange(moment(date).valueOf());
+                  search.onChange(moment(date).unix());
                 } else {
                   search.onChange("");
                 }

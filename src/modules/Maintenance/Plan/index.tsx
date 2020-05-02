@@ -148,6 +148,13 @@ export default class Plane extends BasicComponent<any, any> {
               type: "number",
               onChange: this.planStore.setPlanNum as any,
             },
+            {
+              placeholder: "日期",
+              value: this.planStore.recordDate,
+              key: "recordDate",
+              type: "date",
+              onChange: this.planStore.setProRecordDate as any,
+            },
           ]}
         />
         {this.showCreateModal && (
