@@ -1,5 +1,5 @@
 export enum StorageName {
-  RoleID = 'roleID',
+  User = 'user',
 }
 
 export interface IKeyValues<T = any> {
