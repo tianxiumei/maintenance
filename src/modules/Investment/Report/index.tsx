@@ -34,7 +34,7 @@ export default class Report extends BasicComponent<any, any> {
     return [
       {
         dataIndex: "proName",
-        title: "编号",
+        title: "编码",
       },
       {
         dataIndex: "proName",

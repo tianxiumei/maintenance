@@ -83,6 +83,14 @@ export default class Plane extends BasicComponent<any, any> {
             >
               编辑
             </Button>
+            <Button
+              type="link"
+              onClick={() => {
+                this.handleProject(plan);
+              }}
+            >
+              立项
+            </Button>
           </div>
         ),
       },
@@ -93,6 +101,11 @@ export default class Plane extends BasicComponent<any, any> {
   handleEdit(plan: IPlan) {
     this.setEditPlane(plan);
     this.setShowCreateModal(true);
+  }
+
+  @bind
+  handleProject(plan: IPlan) {
+    this.planStore.project(plan);
   }
 
   @computed
@@ -127,10 +140,6 @@ export default class Plane extends BasicComponent<any, any> {
           columns={this.columns}
           dataSource={this.dataSource}
           emptyText="暂无数据"
-          addBtn={{
-            title: "创建",
-            onClick: () => this.setShowCreateModal(true),
-          }}
           searchFilters={[
             {
               placeholder: "编号",
@@ -147,9 +156,8 @@ export default class Plane extends BasicComponent<any, any> {
               this.setShowCreateModal(false);
               this.setEditPlane(null);
             }}
-            create={this.planStore.createPlan}
             update={this.planStore.updatePlan}
-            plan={this.editPlan}
+            plan={this.editPlan!}
           />
         )}
       </div>

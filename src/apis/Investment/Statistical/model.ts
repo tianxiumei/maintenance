@@ -20,4 +20,5 @@ export interface IStatistical {
   recordUnit: string
   mplanInvest: number
   yplanInvest: number
+  transFlag: number
 }

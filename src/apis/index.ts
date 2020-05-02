@@ -23,20 +23,20 @@ axios.defaults.withCredentials = true
 axios.defaults.timeout = 100000
 // 请求前拦截
 axios.interceptors.request.use(
-  config => {
+  (config) => {
     return config
   },
-  err => {
+  (err) => {
     console.log('请求超时')
     return Promise.reject(err)
   },
 )
 
 axios.interceptors.request.use(
-  req => {
+  (req) => {
     // 对 post 请求数据进行处理
     if (req.method === 'post' && isObject(req.data)) {
-      Object.keys(req.data).forEach(item => {
+      Object.keys(req.data).forEach((item) => {
         !isObject(req.data[item]) &&
           (req.data[item] = JSON.stringify(req.data[item]))
       })
@@ -44,7 +44,7 @@ axios.interceptors.request.use(
     }
     return req
   },
-  error => {
+  (error) => {
     // 请求出错时处理
     return Promise.reject(error)
   },
@@ -52,10 +52,10 @@ axios.interceptors.request.use(
 
 // 返回后拦截
 axios.interceptors.response.use(
-  data => {
+  (data) => {
     return data
   },
-  err => {
+  (err) => {
     if (!err.response) {
       console.log(err)
       return
@@ -67,7 +67,7 @@ axios.interceptors.response.use(
       message.error('登录信息失效⊙﹏⊙∥')
       return
     } else if (err.response.status === 500) {
-      message.error('服务器开小差了⊙﹏⊙∥')
+      message.error(err.response.data.message || '服务器开小差了⊙﹏⊙∥')
       return
     }
     return Promise.reject(err)
@@ -78,24 +78,24 @@ export function get(url: string): Promise<any> {
   return new Promise((resolve, reject) => {
     axios
       .get(url, config)
-      .then(res => {
+      .then((res) => {
         const data = getItem(res, 'data')
         if (data && data.message && data.code !== SUCCESS_CODE) {
           message.error(data.message)
           reject(data.message)
         } else resolve(getItem(data, 'data'))
       })
-      .catch(err => {
+      .catch((err) => {
         reject(err)
       })
   })
 }
 
-export const post = function(url: string, params?: any) {
+export const post = function (url: string, params?: any) {
   return new Promise((resolve, reject) => {
     axios
       .post(url, params, config)
-      .then(res => {
+      .then((res) => {
         const data = getItem(res, 'data')
         if (data && data.code !== SUCCESS_CODE) {
           message.error(getItem(data, 'message') || '')
@@ -105,7 +105,7 @@ export const post = function(url: string, params?: any) {
           message.success(data.message)
         }
       })
-      .catch(err => {
+      .catch((err) => {
         reject(err)
       })
   })

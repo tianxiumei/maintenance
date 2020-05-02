@@ -144,10 +144,10 @@ export const CreateForm = (props: IFormProps) => {
         <Input />
       </Form.Item>
       <Form.Item {...formItemLayout} name="deviceID" label="设备编号">
-        <Input />
+        <Input type="number" />
       </Form.Item>
       <Form.Item {...formItemLayout} name="number" label="数量">
-        <Input />
+        <Input type="number" />
       </Form.Item>
       <Form.Item {...formItemLayout} name="expBudget" label="概算费用">
         <Input />
@@ -162,18 +162,28 @@ export const CreateForm = (props: IFormProps) => {
         </Radio.Group>
       </Form.Item>
       <Form.Item {...formItemLayout} name="plan" label="计划安排">
-        <Input type="number" />
+        <Input />
       </Form.Item>
       <Form.Item {...formItemLayout} name="doneYear" label="结算年度">
         <DatePicker placeholder="结算年度" picker="year" className="date" />
       </Form.Item>
       <Form.Item {...formItemLayout} name="doneCost" label="结算费用">
-        <Input />
+        <Input type="number" />
       </Form.Item>
       <Form.Item {...formItemLayout} name="doneDate" label="结算日期">
         <DatePicker placeholder="结算日期" className="date" />
       </Form.Item>
-      <Form.Item {...formItemLayout} name="recordDate" label="记录日期">
+      <Form.Item
+        rules={[
+          {
+            required: true,
+            message: "请填写记录日期",
+          },
+        ]}
+        {...formItemLayout}
+        name="recordDate"
+        label="记录日期"
+      >
         <DatePicker placeholder="记录日期" className="date" />
       </Form.Item>
       <Form.Item {...formItemLayout} name="fix" label="修理内容">

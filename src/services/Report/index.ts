@@ -13,7 +13,7 @@ import Store from '../../stores/store'
 export default class ReportStore extends Store {
   @observable reports: IReport[] = []
   @observable proName: string = ''
-  @observable recordDate: number = -1
+  @observable recordDate?: number
 
   @bind
   @action
@@ -35,16 +35,16 @@ export default class ReportStore extends Store {
 
   @bind
   listReports() {
-    if (this.recordDate !== -1) {
-      listReportsByDate(this.recordDate).then(report => {
+    if (this.recordDate) {
+      listReportsByDate(this.recordDate).then((report) => {
         this.setReports(report)
       })
     } else if (this.proName) {
-      listReportsByName(this.proName).then(reports => {
+      listReportsByName(this.proName).then((reports) => {
         this.setReports(reports)
       })
     } else {
-      listReports().then(reports => {
+      listReports().then((reports) => {
         this.setReports(reports)
       })
     }

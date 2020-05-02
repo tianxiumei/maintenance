@@ -80,41 +80,62 @@ export const CreateForm = (props: IFormProps) => {
         <Input placeholder="请填写节能环保标志" />
       </Form.Item>
       <Form.Item {...formItemLayout} name="plantotalInvest" label="计划总投资">
-        <Input placeholder="计划总投资" />
+        <Input type="number" placeholder="计划总投资" />
       </Form.Item>
       <Form.Item
         {...formItemLayout}
         label="请填写自开建至本年累计完成投资"
         name="stotalInvest"
       >
-        <Input placeholder="请填写自开建至本年累计完成投资" />
+        <Input type="number" placeholder="请填写自开建至本年累计完成投资" />
       </Form.Item>
-
       <Form.Item {...formItemLayout} name="yplanInvest" label="本年计划投资">
-        <Input />
+        <Input type="number" />
       </Form.Item>
       <Form.Item
         {...formItemLayout}
         name="ytotalInvest"
         label="自年初累计完成投资"
       >
-        <Input />
+        <Input type="number" />
       </Form.Item>
-      <Form.Item {...formItemLayout} name="construction" label="构建成分">
-        <Input />
-      </Form.Item>
-      <Form.Item {...formItemLayout} name="construction" label="构建成分">
-        <Input />
-      </Form.Item>
-      <Form.Item {...formItemLayout} name="installation" label="安装工程">
-        <Input />
-      </Form.Item>
-      <Form.Item {...formItemLayout} name="toolsPurchase" label="设备工具购置">
-        <Input />
-      </Form.Item>
-      <Form.Item {...formItemLayout} name="otherCost" label="其他费用">
-        <Input />
-      </Form.Item>
+      <div>
+        <div>构建成分</div>
+        <Form.Item {...formItemLayout} name="construction" label="(1)构建工程">
+          <Input type="number" />
+        </Form.Item>
+        <Form.Item {...formItemLayout} name="installation" label="(2)安装工程">
+          <Input type="number" />
+        </Form.Item>
+        <Form.Item
+          {...formItemLayout}
+          name="toolsPurchase"
+          label="(3)设备工具购置"
+        >
+          <Input type="number" />
+        </Form.Item>
+        <Form.Item {...formItemLayout} name="otherCost" label="(4)其他费用">
+          <Input type="number" />
+        </Form.Item>
+      </div>
+      <div>
+        <div>用途:</div>
+        <Form.Item {...formItemLayout} name="NLYM" label="(1)农林鱼牧业">
+          <Input type="number" />
+        </Form.Item>
+        <Form.Item {...formItemLayout} name="GYJZ" label="(2)工业建筑业">
+          <Input type="number" />
+        </Form.Item>
+        <Form.Item {...formItemLayout} name="SYYS" label="(3)商业运输业">
+          <Input type="number" />
+        </Form.Item>
+        <Form.Item {...formItemLayout} name="ZZ" label="(4)住宅">
+          <Input type="number" />
+        </Form.Item>
+        <Form.Item {...formItemLayout} name="QT" label="(5)其他">
+          <Input type="number" />
+        </Form.Item>
+      </div>
       <Form.Item
         {...formItemLayout}
         name="doneWork"
@@ -132,36 +153,18 @@ export const CreateForm = (props: IFormProps) => {
         <Input />
       </Form.Item>
       <Form.Item {...formItemLayout} name="constructionArea" label="施工面积">
-        <Input />
+        <Input type="number" />
       </Form.Item>
       <Form.Item {...formItemLayout} name="houseCon" label="住宅（施工）">
-        <Input />
+        <Input type="number" />
       </Form.Item>
       <Form.Item {...formItemLayout} name="completesArea" label="竣工面积">
-        <Input />
+        <Input type="number" />
       </Form.Item>
       <Form.Item {...formItemLayout} name="houseCom" label="住宅（竣工）">
-        <Input />
-      </Form.Item>
-      <Form.Item {...formItemLayout} name="imageProgress" label="形象进度">
-        <Input />
+        <Input type="number" />
       </Form.Item>
       <Form.Item {...formItemLayout} name="recordUnit" label="填报单位">
-        <Input />
-      </Form.Item>
-      <Form.Item {...formItemLayout} name="NLYM" label="用途">
-        <Input />
-      </Form.Item>
-      <Form.Item {...formItemLayout} name="GYJZ" label="工业建筑业">
-        <Input />
-      </Form.Item>
-      <Form.Item {...formItemLayout} name="SYYS" label="商业运输业">
-        <Input />
-      </Form.Item>
-      <Form.Item {...formItemLayout} name="ZZ" label="住宅">
-        <Input />
-      </Form.Item>
-      <Form.Item {...formItemLayout} name="QT" label="其他">
         <Input />
       </Form.Item>
       <Form.Item
@@ -169,35 +172,42 @@ export const CreateForm = (props: IFormProps) => {
         name="houseTotalInvest"
         label="自年初累计完成房屋投资"
       >
-        <Input />
+        <Input type="number" />
+      </Form.Item>
+      <Form.Item
+        {...formItemLayout}
+        name="houseComInvest"
+        label="自年初累计完成房屋竣工价值"
+      >
+        <Input type="number" />
       </Form.Item>
       <Form.Item
         {...formItemLayout}
         name="newFixedAsset"
         label="自年初累计新增固定资产"
       >
-        <Input />
+        <Input type="number" />
       </Form.Item>
       <Form.Item
         {...formItemLayout}
         name="productiveAsset"
         label="累计新增生产性固定资产"
       >
-        <Input />
+        <Input type="number" />
       </Form.Item>
       <Form.Item
         {...formItemLayout}
         name="noproductiveInvest"
         label="累计完成不增加固定资产投资"
       >
-        <Input />
+        <Input type="number" />
       </Form.Item>
       <Form.Item
         {...formItemLayout}
         name="incompleteInvest"
         label="本年底未完成工程累计完成投资"
       >
-        <Input />
+        <Input type="number" />
       </Form.Item>
       <Form.Item {...formItemLayout} name="abilityCode" label="能力编码">
         <Input />
@@ -212,7 +222,7 @@ export const CreateForm = (props: IFormProps) => {
         <Input />
       </Form.Item>
       <Form.Item {...formItemLayout} name="cumIncrease" label="历年累计新增">
-        <Input />
+        <Input type="number" />
       </Form.Item>
       <Form.Item {...formItemLayout} name="yearIncrease" label="本年新增">
         <Input />
@@ -238,26 +248,26 @@ export const CreateForm = (props: IFormProps) => {
         <Input />
       </Form.Item>
       <Form.Item {...formItemLayout} name="energySaving" label="节约能源">
-        <Input />
+        <Input type="number" />
       </Form.Item>
       <Form.Item {...formItemLayout} name="otherSaving" label="其他节约">
-        <Input />
+        <Input type="number" />
       </Form.Item>
       <Form.Item {...formItemLayout} name="addBreed" label="增加品种">
-        <Input />
+        <Input type="number" />
       </Form.Item>
       <Form.Item
         {...formItemLayout}
         name="increaseQuality"
         label="提高产品质量"
       >
-        <Input />
+        <Input type="number" />
       </Form.Item>
       <Form.Item {...formItemLayout} name="sfzl" label="三废治理">
-        <Input />
+        <Input type="number" />
       </Form.Item>
       <Form.Item {...formItemLayout} name="others" label="其他">
-        <Input />
+        <Input type="number" />
       </Form.Item>
       <Form.Item {...formItemLayout} name="fundSource" label="资金来源">
         <Input />

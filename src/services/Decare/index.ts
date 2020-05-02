@@ -6,6 +6,7 @@ import {
   updateDecare,
   listDecaresByName,
   listDecaresById,
+  toPlane,
 } from 'apis/maintenance'
 import { observable, action } from 'mobx'
 import { message } from 'antd'
@@ -15,7 +16,7 @@ import { IDecare } from '../../apis/maintenance/model'
 export class DecareStore extends Store {
   @observable decares: IDecare[] = []
   @observable proName: string = ''
-  @observable id: number = -1
+  @observable id?: number
 
   @bind
   @action
@@ -38,15 +39,15 @@ export class DecareStore extends Store {
   @bind
   listDecares() {
     if (this.proName) {
-      listDecaresByName(this.proName).then(decares => {
+      listDecaresByName(this.proName).then((decares) => {
         this.setDecares(decares)
       })
-    } else if (this.id !== -1) {
-      listDecaresById(this.id).then(decares => {
+    } else if (this.id) {
+      listDecaresById(this.id).then((decares) => {
         this.setDecares(decares)
       })
     } else {
-      listDecares().then(decares => {
+      listDecares().then((decares) => {
         this.setDecares(decares)
       })
     }
@@ -66,5 +67,9 @@ export class DecareStore extends Store {
   @bind
   updateDecare(decare: IDecare) {
     return updateDecare(decare).then(() => this.listDecares())
+  }
+  @bind
+  toPlane(decare: IDecare) {
+    return toPlane(decare)
   }
 }

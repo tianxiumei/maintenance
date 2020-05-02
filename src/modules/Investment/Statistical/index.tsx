@@ -80,21 +80,22 @@ export default class Statistical extends BasicComponent<any, any> {
       {
         title: "操作",
         key: "action",
-        render: (Statistical: IStatistical) => (
+        render: (statistical: IStatistical) => (
           <div>
             <Button
               type="link"
               onClick={() => {
-                this.handleEdit(Statistical);
+                this.handleEdit(statistical);
               }}
             >
               编辑
             </Button>
             <Button
               type="link"
+              disabled={statistical.transFlag === 0}
               onClick={() => {
                 this.setEditType("toReport");
-                this.handleEdit(Statistical);
+                this.handleEdit(statistical);
               }}
             >
               转入到报表

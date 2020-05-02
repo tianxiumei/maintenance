@@ -11,7 +11,7 @@ import "./style.scss";
 
 interface ISearchProps {
   placeholder: string;
-  value: string | number;
+  value?: string | number;
   key: string;
   type: "string" | "number" | "date";
   onChange: (value: string | number) => void;
@@ -57,7 +57,7 @@ export default class AdvancedTable<T> extends React.Component<
                 if (date) {
                   search.onChange(moment(date).valueOf());
                 } else {
-                  search.onChange(-1);
+                  search.onChange("");
                 }
               }}
             />

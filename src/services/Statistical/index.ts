@@ -14,7 +14,7 @@ import Store from '../../stores/store'
 export default class StatisticalStore extends Store {
   @observable statisticals: IStatistical[] = []
   @observable proName: string = ''
-  @observable recordDate: number = -1
+  @observable recordDate?: number
 
   @bind
   @action
@@ -37,15 +37,15 @@ export default class StatisticalStore extends Store {
   @bind
   listStatisticals() {
     if (this.proName) {
-      listStatisticalsByName(this.proName).then(statisticals => {
+      listStatisticalsByName(this.proName).then((statisticals) => {
         this.setStatisticals(statisticals)
       })
-    } else if (this.recordDate !== -1) {
-      listStatisticalsByDate(this.recordDate).then(statisticals => {
+    } else if (this.recordDate) {
+      listStatisticalsByDate(this.recordDate).then((statisticals) => {
         this.setStatisticals(statisticals)
       })
     } else {
-      listStatisticals().then(statisticals => {
+      listStatisticals().then((statisticals) => {
         this.setStatisticals(statisticals)
       })
     }

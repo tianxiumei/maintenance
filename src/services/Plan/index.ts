@@ -1,4 +1,3 @@
-import { message } from 'antd'
 import bind from 'utils/bind'
 import { observable, action } from 'mobx'
 import { IPlan } from 'apis/plan/model'
@@ -13,8 +12,8 @@ import Store from '../../stores/store'
 
 export class PlanStore extends Store {
   @observable plans: IPlan[] = []
-  @observable planNum: number = -1
-  @observable recordDate: number = -1
+  @observable planNum?: number
+  @observable recordDate?: number
 
   @bind
   @action
@@ -36,16 +35,16 @@ export class PlanStore extends Store {
 
   @bind
   listPlans() {
-    if (this.planNum !== -1) {
-      listPlanByPlanNum(this.planNum).then(plans => {
+    if (this.planNum) {
+      listPlanByPlanNum(this.planNum).then((plans) => {
         this.setPlans(plans)
       })
-    } else if (this.recordDate !== -1) {
-      listPlanRecordDate(this.recordDate).then(plans => {
+    } else if (this.recordDate) {
+      listPlanRecordDate(this.recordDate).then((plans) => {
         this.setPlans(plans)
       })
     } else {
-      listPlans().then(plans => {
+      listPlans().then((plans) => {
         this.setPlans(plans)
       })
     }
@@ -55,7 +54,12 @@ export class PlanStore extends Store {
   createPlan(plane: IPlan) {
     return project(plane).then(() => {
       this.listPlans()
-      message.success('创建成功')
+    })
+  }
+  @bind
+  project(plane: IPlan) {
+    return project(plane).then(() => {
+      this.listPlans()
     })
   }
   @bind

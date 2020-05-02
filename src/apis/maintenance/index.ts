@@ -36,3 +36,8 @@ export function updateDecare(decare: IDecare) {
 export function findleDecare(id: string): Promise<IDecare> {
   return get(`${API}/reg/view/Id/${id}`) as any
 }
+
+// 定文
+export function toPlane(params: IDecare) {
+  return post(`${API}/reg/toplan`, JSON.stringify(params))
+}

@@ -19,6 +19,7 @@ const tailLayout = {
 
 interface IFormProps {
   statistical: IStatistical | null;
+  type?: string;
   onCancle: () => void;
   onSubmit: (report: IStatistical) => void;
 }
@@ -69,7 +70,6 @@ export const CreateForm = (props: IFormProps) => {
       <Form.Item {...formItemLayout} name="proSize" label="规模">
         <Input placeholder="请填写规模" />
       </Form.Item>
-
       <Form.Item
         {...formItemLayout}
         name="yplanInvest"
@@ -110,19 +110,36 @@ export const CreateForm = (props: IFormProps) => {
       >
         <Input type="number" />
       </Form.Item>
+      {props.type && (
+        <div>
+          <div>构建成分</div>
+          <Form.Item
+            {...formItemLayout}
+            name="construction"
+            label="(1)构建工程"
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item
+            {...formItemLayout}
+            name="installation"
+            label="(2)安装工程"
+          >
+            <Input type="number" />
+          </Form.Item>
+          <Form.Item
+            {...formItemLayout}
+            name="toolsPurchase"
+            label="(3)设备工具购置"
+          >
+            <Input type="number" />
+          </Form.Item>
+          <Form.Item {...formItemLayout} name="otherCost" label="(4)其他费用">
+            <Input type="number" />
+          </Form.Item>
+        </div>
+      )}
 
-      <Form.Item {...formItemLayout} name="construction" label="构建成分">
-        <Input type="number" />
-      </Form.Item>
-      <Form.Item {...formItemLayout} name="installation" label="安装工程">
-        <Input type="number" />
-      </Form.Item>
-      <Form.Item {...formItemLayout} name="toolsPurchase" label="设备工具购置">
-        <Input type="number" />
-      </Form.Item>
-      <Form.Item {...formItemLayout} name="otherCost" label="其他费用">
-        <Input type="number" />
-      </Form.Item>
       <Form.Item
         {...formItemLayout}
         name="doneWork"

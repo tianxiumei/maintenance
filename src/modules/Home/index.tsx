@@ -22,7 +22,7 @@ export default class Home extends React.Component {
   onFinish(values: ILoginParams) {
     login(values).then((data) => {
       localStorage.setItem(StorageName.RoleID, JSON.stringify(data.roleID));
-      routerStore.push("/main/maintenance");
+      routerStore.push("/main/maintenance/declare");
     });
   }
   @bind

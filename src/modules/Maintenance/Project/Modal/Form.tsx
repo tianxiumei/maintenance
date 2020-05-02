@@ -79,7 +79,7 @@ export const CreateForm = (props: IFormProps) => {
         <Input placeholder="请填写计划批号" />
       </Form.Item>
       <Form.Item {...formItemLayout} name="expBudget" label="费用概算">
-        <Input placeholder="请填写费用概算" />
+        <Input type="number" placeholder="请填写费用概算" />
       </Form.Item>
       <Form.Item {...formItemLayout} name="propertyRes" label="资产简历">
         <Input.TextArea placeholder="请填写资产简历" />

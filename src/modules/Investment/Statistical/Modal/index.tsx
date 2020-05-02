@@ -45,7 +45,7 @@ export default class StatisticalModal extends BasicComponent<
         .then(() => this.handleCancel());
     } else {
       this.props
-        .create({ ...result } as IStatistical)
+        .create({ ...result, transFlag: 0 } as IStatistical)
         .then(() => this.handleCancel());
     }
   }
@@ -63,6 +63,7 @@ export default class StatisticalModal extends BasicComponent<
         onCancel={this.handleCancel}
       >
         <CreateForm
+          type={this.props.type}
           statistical={this.props.statistical}
           onCancle={this.handleCancel}
           onSubmit={this.handleSubmit}

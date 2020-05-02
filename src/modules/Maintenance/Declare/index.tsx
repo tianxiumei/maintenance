@@ -33,20 +33,16 @@ export default class Declare extends BasicComponent<any, any> {
   get columns() {
     return [
       {
+        dataIndex: "id",
+        title: "Id",
+      },
+      {
         dataIndex: "proName",
         title: "名称",
       },
       {
         dataIndex: "typeName",
         title: "类别名称",
-      },
-      {
-        dataIndex: "superClass",
-        title: "父类别",
-      },
-      {
-        dataIndex: "subClass",
-        title: "子类别",
       },
       {
         dataIndex: "reportOrg",
@@ -85,6 +81,14 @@ export default class Declare extends BasicComponent<any, any> {
             >
               编辑
             </Button>
+            <Button
+              type="link"
+              onClick={() => {
+                this.decareStore.toPlane(declare);
+              }}
+            >
+              定文
+            </Button>
             <Popconfirm
               title={`确定删除${declare.proName}?`}
               okText="确认"
@@ -118,7 +122,7 @@ export default class Declare extends BasicComponent<any, any> {
   componentDidMount() {
     this.addDisposer(
       reaction(
-        () => this.decareStore.proName,
+        () => this.decareStore.proName || this.decareStore.id,
         () => {
           this.debounceListEvent();
           console.log(this.decareStore.proName);
@@ -148,7 +152,7 @@ export default class Declare extends BasicComponent<any, any> {
               value: this.decareStore.proName,
               key: "display",
               type: "string",
-              onChange: this.decareStore.setProName as any,
+              onChange: this.decareStore.setProId as any,
             },
             {
               placeholder: "名称",
