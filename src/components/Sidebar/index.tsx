@@ -23,7 +23,12 @@ export default class SideBar extends React.Component<ISideBarProps, any> {
     return (
       <Sider trigger={null} collapsible collapsed={this.collapsed}>
         <div className="logo" />
-        <Menu theme="dark" mode="inline" defaultSelectedKeys={["1"]}>
+        <Menu
+          theme="dark"
+          mode="inline"
+          defaultSelectedKeys={["declare"]}
+          defaultOpenKeys={["maintenance"]}
+        >
           <SubMenu key="maintenance" title="维修">
             <MenuItem key="declare">
               <Link to="/main/maintenance/declare">维修申报</Link>
